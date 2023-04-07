@@ -1,6 +1,6 @@
 CREATE DATABASE tarea_mvc;
 USE tarea_mvc;
-
+-- Hacemos una tabla de productos referente a los productos de las Farmacias
 CREATE TABLE productos
 (
 idproducto 	 		INT    AUTO_INCREMENT  PRIMARY KEY,
@@ -12,8 +12,9 @@ formato				VARCHAR(70)   NOT NULL,
 restricciones		VARCHAR(120)  NOT NULL,
 stock					INT     		  NOT NULL,
 precio				DECIMAL(7,2)  NOT NULL,
-fechaproduccion    DATE 		  NOT NULL,
+fechaproduccion   DATE 		  NOT NULL,
 fechavencimiento  DATE 			  NOT NULL,
+fecharegistro     DATETIME			DEFAULT NOW(),
 estado				CHAR(1)       NOT NULL    DEFAULT'1'
 )ENGINE = INNODB;
 
@@ -21,3 +22,49 @@ SELECT* FROM productos
 
 INSERT INTO productos(nombreproducto, categoria, proveedor, descripcion, formato, restricciones, stock, precio, fechaproduccion, fechavencimiento)VALUES
 ('paracetamol','medicamento','Bayer','pastilla para algo','pastilla','venta con receta',40,1.50,'2021-05-12','2023-05-12')
+
+
+-- CREAMOS LOS PROCEDIMIENTOS ALMACENADOS
+-- LISTAR
+
+
+DELIMITER$$
+CREATE PROCEDURE spu_productos_listar()
+BEGIN
+	SELECT idproducto,
+			 nombreproducto,
+			 categoria,
+			 proveedor,
+			 descripcion,
+			 formato,
+			 restricciones,
+			 stock,
+			 precio,
+			 fechaproduccion,
+			 fechavencimiento
+			 FROM productos
+			 WHERE estado = '1'
+			 ORDER BY idproducto DESC;
+END$$
+
+
+-- AGREGAR 
+
+DELIMITER $$
+CREATE PROCEDURE spu_productos_registrar
+(
+	IN nombreproducto_ 	VARCHAR(60),
+	IN categoria_ 			VARCHAR(70),
+	IN proveedor_     	VARCHAR(60),
+	IN descripcion_      VARCHAR(120),
+	IN formato_ 			VARCHAR(70),
+	IN restricciones_    VARCHAR(120),
+	IN stock_				INT,
+	IN precio_				DECIMAL(7,2),
+	IN fechaproduccion_		DATE,
+	IN fechavencimiento_     DATE
+)
+BEGIN
+	INSERT INTO cursos(nombreproducto, categoria, proveedor, descripcion, formato, restricciones, stock, precio, fechaproduccion, fechavencimiento) VALUES
+	(nombreproducto_, categoria_ , proveedor_, descripcion_, formato_, restricciones_, stock_, precio_, fechaproduccion_, fechavencimiento_);
+	END $$
