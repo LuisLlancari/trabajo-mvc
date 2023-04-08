@@ -10,7 +10,8 @@
   <!-- Bootstrap CSS v5.2.1 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-
+ <!---Iconos-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
 </head>
     <!--Inicio de la cabezera con botones-->
     <div class="container mt-4">
@@ -21,29 +22,30 @@
                         <strong>Lista de Productos</strong>
                     </div>
                     <div class="col-md-6 text-end">
-                        <button class="btn btn-success btn-sm"></button>
+                        <button class="btn btn-success btn-sm" id="abrir-modal" data-bs-toggle="modal" data-bs-target="#modal-registro-producto">
+                            <i class="bi bi-plus-circle-fill"></i>Agregar productos
+                        </button>
 
                     </div>
                 </div>
             </div>
             <!--fin de la cabezera con botones-->
             <!--Inicio de la tabla-->
-            <div class="card-body">
+            <div class="card-body text-center" >
                 <table class="table table-md table-striped">
-                    <colgroup>
+                    <colgroup >
                         <col width = "5%">
-                        <col width = "30%">
+                        <col width = "14%">
+                        <col width = "10%">
+                        <col width = "10%">
                         <col width = "15%">
-                        <col width = "10">
                         <col width = "10%">
-                        <col width = "10%">
-                        <col width = "10%">
-                        <col width = "10%">
-                        <col width = "10%">
-                        <col width = "10%">
-                        <col width = "10%">
+                        <col width = "12%">
+                        <col width = "7%">
+                        <col width = "7%">
+                    
                     </colgroup>
-                    <thead>
+                    <thead >
                         <tr>
                             <th>N°</th>
                             <th>Nombre productos</th>
@@ -51,20 +53,106 @@
                             <th>Proveedor</th>
                             <th>Descripcion</th>
                             <th>formato</th>
+                            <th>restricciones</th>
                             <th>stock</th>
                             <th>precio</th>
-                            <th>F. Produccion</th>
-                            <th>F. vencimiento</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <th>1</th>
+                            <th>paracetamol</th>
+                            <th>medicamento</th>
+                            <th>bayer</th>
+                            <th>pastilla para el dolor</th>
+                            <th>blister</th>
+                            <th>necesita receta</th>
+                            <th>45</th>
+                            <th>34.90</th>
                         
+                          </tr>
                     </tbody>
                 </table> 
             </div>
             <!--Fin de la tabla-->
+            <div class="card-footer text-end">
+                <button class="btn btn-primary btn-md">Actualizar</button>
+            </div>
 
         </div>
+    </div>
+
+    <!-- modales-->
+    <div class="modal fade" id="modal-registro-producto" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header bg-secondary text-light">
+          <h5 class="modal-title" id="modalTitleId">Registro de Productos</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body" >
+          <form action="" id="formulario-curso">
+            <div class="mb-3">
+              <label for="nombrecurso" class="form-label">Nombre Producto</label>
+              <input type="text" class="form-control form-control-sm" id="nombrecurso">
+            </div>
+            <div class="mb-3">
+              <label for="Categoria" class="form-label">categoria</label>
+              <select id="Categoria" class="form-select form-select-sm">
+                <option value="">Seleccione</option>
+                <option value="medicamento">medicamento</option>
+                <option value="Aseo">Aseo</option>
+                <!-- <option value="Mecánica">Mecánica</option> -->
+              </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="Proveedor" class="form-label">Proveedor</label>
+                <input type="text" class="form-control form-control-sm" id="Proveedor">
+            </div>
+
+            <div class="mb-3">
+                <label for="Descripcion" class="form-label">Descripcion</label>
+                <input type="text" class="form-control form-control-sm" id="Descripcion">
+            </div>
+
+            <div class="mb-3">
+                <label for="Formato" class="form-label">Formato</label>
+                <select id="Formato" class="form-select form-select-sm">
+                  <option value="">Seleccione</option>
+                  <option value="pastilla">pastilla</option>
+                  <option value="jarabe">jarabe</option>
+                  <option value="crema">crema</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="restriccion" class="form-label">Restriccion</label>
+                <select id="Restriccion" class="form-select form-select-sm">
+                  <option value="">Seleccione</option>
+                  <option value="Con Receta">con receta</option>
+                  <option value="sin receta">sin receta</option>
+                </select>
+              </div>
+
+            <div class="mb-3">
+              <label for="estock" class="form-label">stock:</label>
+              <input type="text" class="form-control form-control-sm" id="precio">
+            </div>
+            <div class="mb-3">
+                <label for="precio" class="form-label">Precio:</label>
+                <input type="text" class="form-control form-control-sm" id="precio">
+              </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary btn-sm" id="guardar-curso">Guardar</button>
+        </div>
+      </div>
+    </div>
     </div>
 
 <body>
