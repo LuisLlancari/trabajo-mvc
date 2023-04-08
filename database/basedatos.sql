@@ -65,6 +65,16 @@ CREATE PROCEDURE spu_productos_registrar
 	IN fechavencimiento_     DATE
 )
 BEGIN
-	INSERT INTO cursos(nombreproducto, categoria, proveedor, descripcion, formato, restricciones, stock, precio, fechaproduccion, fechavencimiento) VALUES
+	INSERT INTO productos (nombreproducto, categoria, proveedor, descripcion, formato, restricciones, stock, precio, fechaproduccion, fechavencimiento) VALUES
 	(nombreproducto_, categoria_ , proveedor_, descripcion_, formato_, restricciones_, stock_, precio_, fechaproduccion_, fechavencimiento_);
 	END $$
+
+-- PROCEDIMIENTO PAARA ELIMINAR
+DELIMITER $$
+CREATE PROCEDURE spu-productos_eliminar(IN idcurso_ INT)
+BEGIN
+	UPDATE productos
+	SET estado = '0'
+	WHERE idcurso = idcurso_;
+END$$
+
