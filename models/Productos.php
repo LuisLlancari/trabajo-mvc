@@ -7,7 +7,8 @@ class Productos extends Conexion{
   private $accesoBD;
 
 
-
+// Preparamos las consultas
+// con los procedimientos almacenasdos hechos
   public function __CONSTRUCT(){
     $this->accesoBD = parent::getConexion();
   }

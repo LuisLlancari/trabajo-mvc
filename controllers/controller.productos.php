@@ -9,7 +9,7 @@ if (isset($_POST['operacion'])){
   if($_POST['operacion'] == 'listar'){
     $datosObtenidos = $producto->listarProductos();
 
-    // echo json_encode($datosObtenidos);
+   
      
      
     $numeroFila = 1;
@@ -41,10 +41,7 @@ if (isset($_POST['operacion'])){
       }
     }
  
-     
-
-
-
+    
   }
 
   if ($_POST['operacion'] == 'registrar'){
