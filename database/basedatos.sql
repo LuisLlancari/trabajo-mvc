@@ -66,10 +66,10 @@ BEGIN
 
 -- PROCEDIMIENTO PAARA ELIMINAR
 DELIMITER $$
-CREATE PROCEDURE spu-productos_eliminar(IN idcurso_ INT)
+CREATE PROCEDURE spu_productos_eliminar(IN idproducto_ INT)
 BEGIN
 	UPDATE productos
 	SET estado = '0'
-	WHERE idcurso = idcurso_;
+	WHERE idproducto = idproducto_;
 END$$
 
