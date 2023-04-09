@@ -100,38 +100,42 @@
               <input type="text" class="form-control form-control-sm" id="nombreproducto">
             </div>
             <div class="mb-3">
-              <label for="Categoria" class="form-label">categoria</label>
-              <select id="Categoria" class="form-select form-select-sm">
+              <label for="categoria" class="form-label">categoria</label>
+              <select id="categoria" class="form-select form-select-sm">
                 <option value="">Seleccione</option>
-                <option value="medicamento">medicamento</option>
-                <option value="Aseo">Aseo</option>
+                <option value="medicamentos">medicamentos</option>
+                <option value="cuidadoPersonal">cuidado Personal</option>
+                <option value="vitaminas">vitaminas</option>
+                <option value="suplementos">suplementos</option>
+
                 <!-- <option value="Mecánica">Mecánica</option> -->
               </select>
             </div>
 
             <div class="mb-3">
                 <label for="proveedor" class="form-label">Proveedor</label>
-                <input type="text" class="form-control form-control-sm" id="Proveedor">
+                <input type="text" class="form-control form-control-sm" id="proveedor">
             </div>
 
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripcion</label>
-                <input type="text" class="form-control form-control-sm" id="Descripcion">
+                <input type="text" class="form-control form-control-sm" id="descripcion">
             </div>
 
             <div class="mb-3">
-                <label for="formato" class="form-label">Formato</label>
+                <label for="formato" class="form-label">Presentacion</label>
                 <select id="formato" class="form-select form-select-sm">
                   <option value="">Seleccione</option>
-                  <option value="pastilla">pastilla</option>
-                  <option value="jarabe">jarabe</option>
-                  <option value="crema">crema</option>
+                  <option value="tabletas">tabletas</option>
+                  <option value="jarabes">jarabes</option>
+                  <option value="soluciones">soluciones</option>
+                  <option value="inyectables">inyectables</option>
                 </select>
               </div>
 
               <div class="mb-3">
-                <label for="restriccion" class="form-label">Restriccion</label>
-                <select id="restriccion" class="form-select form-select-sm">
+                <label for="restricciones" class="form-label">Venta</label>
+                <select id="restricciones" class="form-select form-select-sm">
                   <option value="">Seleccione</option>
                   <option value="Con Receta">con receta</option>
                   <option value="sin receta">sin receta</option>
@@ -219,8 +223,32 @@
         }
       }  
 
-
+      
       $("#guardar-producto").click(registrarProducto);
+
+
+      $("#tabla-productos tbody").on("click", ".eliminar", function (){
+        const idproductoEliminar = $(this).data("idproducto");
+        if (confirm("Estas seguro de proceder? ")){ 
+          $.ajax({
+
+            url: '../controllers/controller.productos.php',
+            type: 'POST',
+            data: {
+              operacion     :'eliminar',
+              idproducto       : idproductoEliminar
+            },
+            success: function(result){
+              if (result == ""){
+                mostrarProductos();
+              }
+            }
+            
+          });
+         }
+      });
+
+      mostrarProductos();
   });
 </script>
 

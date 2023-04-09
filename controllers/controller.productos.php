@@ -31,8 +31,8 @@ if (isset($_POST['operacion'])){
           <td>{$producto['stock']}</td>
           <td>{$producto['precio']}</td>
           <td>
-            <a href='#' data-producto='{$producto['idproducto']}' class='btn btn-danger btn-sm eliminar'><i class='bi bi-trash3'></i></a>
-            <a href='#' data-producto='{$producto['idproducto']}' class='btn btn-info btn-sm editar'><i class='bi bi-pencil-fill'></i></a>
+            <a href='#' data-idproducto='{$producto['idproducto']}' class='btn btn-danger btn-sm eliminar'><i class='bi bi-trash3'></i></a>
+            <a href='#' data-idproducto='{$producto['idproducto']}' class='btn btn-info btn-sm editar'><i class='bi bi-pencil-fill'></i></a>
           </td>
         </tr>
       ";
@@ -63,5 +63,8 @@ if (isset($_POST['operacion'])){
     $producto->registrarProductos($datosForm);
   }
 
+  if ($_POST['operacion'] == 'eliminar'){
+    $producto->eliminarProducto($_POST['idproducto']);
+  }  
 
 }

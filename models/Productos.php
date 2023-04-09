@@ -50,4 +50,13 @@ class Productos extends Conexion{
     
   }
 
+  public function eliminarProducto($idcurso = 0){
+    try{
+      $consulta = $this->accesoBD->prepare("CALL spu_productos_eliminar(?)");
+      $consulta->execute(array($idcurso));
+    }
+    catch(Exception $e){
+      die($e->getMessage());
+    }
+  }
 }
