@@ -12,23 +12,22 @@ formato				VARCHAR(70)   NOT NULL,
 restricciones		VARCHAR(120)  NOT NULL,
 stock					INT     		  NOT NULL,
 precio				DECIMAL(7,2)  NOT NULL,
-fechaproduccion   DATE 		  NOT NULL,
-fechavencimiento  DATE 			  NOT NULL,
 fecharegistro     DATETIME			DEFAULT NOW(),
 estado				CHAR(1)       NOT NULL    DEFAULT'1'
 )ENGINE = INNODB;
 
 SELECT* FROM productos
 
-INSERT INTO productos(nombreproducto, categoria, proveedor, descripcion, formato, restricciones, stock, precio, fechaproduccion, fechavencimiento)VALUES
-('paracetamol','medicamento','Bayer','pastilla para algo','pastilla','venta con receta',40,1.50,'2021-05-12','2023-05-12')
+INSERT INTO productos(nombreproducto, categoria, proveedor, descripcion, formato, restricciones, stock, precio)VALUES
+('paracetamol2','medicamento','Bayer','pastilla para algo','pastilla','venta con receta',40,1.50)
 
 
 -- CREAMOS LOS PROCEDIMIENTOS ALMACENADOS
 -- LISTAR
 
+CALL spu_productos_listar()
 
-DELIMITER$$
+DELIMITER $$
 CREATE PROCEDURE spu_productos_listar()
 BEGIN
 	SELECT idproducto,
@@ -39,13 +38,11 @@ BEGIN
 			 formato,
 			 restricciones,
 			 stock,
-			 precio,
-			 fechaproduccion,
-			 fechavencimiento
+			 precio
 			 FROM productos
 			 WHERE estado = '1'
 			 ORDER BY idproducto DESC;
-END$$
+END $$
 
 
 -- AGREGAR 
@@ -60,13 +57,11 @@ CREATE PROCEDURE spu_productos_registrar
 	IN formato_ 			VARCHAR(70),
 	IN restricciones_    VARCHAR(120),
 	IN stock_				INT,
-	IN precio_				DECIMAL(7,2),
-	IN fechaproduccion_		DATE,
-	IN fechavencimiento_     DATE
+	IN precio_				DECIMAL(7,2)
 )
 BEGIN
-	INSERT INTO productos (nombreproducto, categoria, proveedor, descripcion, formato, restricciones, stock, precio, fechaproduccion, fechavencimiento) VALUES
-	(nombreproducto_, categoria_ , proveedor_, descripcion_, formato_, restricciones_, stock_, precio_, fechaproduccion_, fechavencimiento_);
+	INSERT INTO productos (nombreproducto, categoria, proveedor, descripcion, formato, restricciones, stock, precio) VALUES
+	(nombreproducto_, categoria_ , proveedor_, descripcion_, formato_, restricciones_, stock_, precio_);
 	END $$
 
 -- PROCEDIMIENTO PAARA ELIMINAR
